@@ -1,5 +1,4 @@
 import Navbar from "@/components/navbar/navbar";
-import { Button } from "@/components/shadcnui/button";
 
 export default function Index() {
   return (
