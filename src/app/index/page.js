@@ -1,10 +1,16 @@
+import Navbar from "@/components/navbar/navbar";
 import { Button } from "@/components/shadcnui/button";
 
 export default function Index() {
   return (
     <>
-      <h1>Hello</h1>
-      <Button variant="outline">Button</Button>
+      <Navbar />
+      <div className="pl-3 pr-3">
+        <div className="">
+          hello
+        </div>
+      </div>
+      {/* <Button>Button</Button> */}
     </>
   );
 }
