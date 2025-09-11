@@ -1,7 +1,8 @@
 "use client"
 
 import Navbar from "@/components/navbar/navbar";
-import { Component, Microchip, WifiHigh, Zap } from "lucide-react";
+import { Button } from "@/components/shadcnui/button";
+import { Component, Microchip, Phone, ShoppingCart, WifiHigh, Zap } from "lucide-react";
 
 export default function Index() {
   return (
@@ -23,24 +24,39 @@ export default function Index() {
               for your project. If you're a student, hobbyist, or developer who wishes to build circuits,
               build your next breakthrough project with CircuitBay.
             </p>
+            {/* Buttons */}
+            <div className="flex">
+              <div className="mr-4">
+                <Button className="bg-secondary text-foreground-secondary w-60 hover:bg-secondary/10 hover:text-secondary">
+                  <Phone /> Contact Us
+                </Button>
+              </div>
+              <div>
+                <Button
+                  variant="outline"
+                  className="w-60 bg-secondary/10 border-secondary text-secondary hover:bg-secondary"
+                >
+                  <ShoppingCart /> Shop components
+                </Button>
+              </div>
+            </div>
           </div>
-
           {/* Right side */}
           <div className="grid grid-cols-2 gap-4">
             <div className="bg-secondary h-24 flex flex-col items-center justify-center rounded-sm">
-              <Microchip  size={28} />
+              <Microchip size={28} />
               <p>Microcontrollers</p>
             </div>
             <div className="bg-secondary h-24 flex flex-col items-center justify-center rounded-sm">
-              <WifiHigh  size={28}  />
+              <WifiHigh size={28} />
               <p>IoT</p>
             </div>
             <div className="bg-secondary h-24 flex flex-col items-center justify-center rounded-sm">
-              <Zap  size={28}  />
+              <Zap size={28} />
               <p>Sensors</p>
             </div>
             <div className="bg-secondary h-24 flex flex-col items-center justify-center rounded-sm">
-              <Component  size={28}  />
+              <Component size={28} />
               <p>Components</p>
             </div>
           </div>
