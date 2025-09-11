@@ -23,8 +23,10 @@ export default function Navbar() {
   if (!isMounted) return null;
 
   const navbarLinks = [
-    { name: "link1", href: "" },
-    { name: "link2", href: "" },
+    { name: "Home", href: "" },
+    { name: "About", href: "" },
+    { name: "Product", href: "" },
+    { name: "Contact", href: "" },
   ];
 
   return (
@@ -46,7 +48,7 @@ export default function Navbar() {
                     className="bg-secondary text-secondary-foreground"
                     asChild
                   >
-                    <Link href={link.href}>{link.name}</Link>
+                    <Link href={link.href} className="hover: text-blue-color">{link.name}</Link>
                   </NavigationMenuLink>
                 </NavigationMenuItem>
               ))}
