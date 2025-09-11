@@ -1,4 +1,5 @@
 "use client";
+
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -6,17 +7,24 @@ import {
   NavigationMenuList,
 } from "@/components/shadcnui/navigation-menu";
 import Link from "next/link";
-import { useState } from "react";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 import { Button } from "../shadcnui/button";
 import { Menu, X } from "lucide-react";
 
-export default function Navbar2() {
+export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
 
+  // Forces the navbar to render only after hydration (client-side), which avoids mismatches.
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => setIsMounted(true), []);
+
+  if (!isMounted) return null;
+
   const navbarLinks = [
-    { name: "link1", href: "/" },
-    { name: "link2", href: "/about" },
+    { name: "link1", href: "" },
+    { name: "link2", href: "" },
   ];
 
   return (
@@ -25,7 +33,7 @@ export default function Navbar2() {
       <nav className="p-3 bg-secondary flex justify-between items-center">
         {/* Logo */}
         <div>
-          <img src="/images/Hero_Logo.png" alt="Logo" className="w-[180px]" />
+          <Image src="/images/Hero_Logo.png" alt="Logo" width={180} height={60} />
         </div>
 
         {/* Desktop Menu */}
@@ -56,16 +64,20 @@ export default function Navbar2() {
 
       {/* Mobile Sidebar */}
       <div
-        className={`fixed top-0 left-0 min-h-screen w-64 bg-slate-100 shadow-lg transform transition-transform duration-300 ease-in-out ${
-          isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
-        } lg:hidden z-50`}
+        className={`fixed top-0 left-0 min-h-screen w-64 bg-secondary shadow-lg transform transition-transform duration-300 ease-in-out ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
+          } lg:hidden z-50`}
       >
         <div className="flex flex-row items-center border-b pb-4">
           <Link
             href="/"
             className="cursor-pointer text-red-600 font-bold text-xl pt-4 ps-4"
           >
-            NEXTNEWS
+            <Image
+              src="/images/Hero_Logo.png"
+              alt="Logo"
+              width={180}
+              height={60}
+            />
           </Link>
 
           {/* Close btn */}
