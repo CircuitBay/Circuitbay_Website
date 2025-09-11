@@ -48,7 +48,7 @@ export default function Navbar() {
                     className="bg-secondary text-secondary-foreground"
                     asChild
                   >
-                    <Link href={link.href} className="hover: text-blue-color">{link.name}</Link>
+                    <Link href={link.href} className="text-md hover:text-blue-color">{link.name}</Link>
                   </NavigationMenuLink>
                 </NavigationMenuItem>
               ))}
@@ -72,7 +72,7 @@ export default function Navbar() {
         <div className="flex flex-row items-center border-b pb-4">
           <Link
             href="/"
-            className="cursor-pointer text-red-600 font-bold text-xl pt-4 ps-4"
+            className="cursor-pointer pt-4 ps-4"
           >
             <Image
               src="/images/Hero_Logo.png"
@@ -86,7 +86,7 @@ export default function Navbar() {
           <button
             onClick={toggleMobileMenu}
             aria-label="Close menu"
-            className="absolute top-4 right-4 text-slate-600 hover:text-red-500"
+            className="absolute top-4 right-4 text-foreground-secondary hover:text-blue-color"
           >
             <X className="w-8 h-8" />
           </button>
@@ -96,7 +96,7 @@ export default function Navbar() {
           {navbarLinks.map((item) => (
             <li
               key={item.name}
-              className="flex items-center p-1 text-lg gap-x-2 text-slate-600 hover:text-red-500"
+              className="flex items-center p-1 text-md gap-x-2 text-foreground-secondary hover:text-blue-color"
             >
               <Link
                 href={item.href}
