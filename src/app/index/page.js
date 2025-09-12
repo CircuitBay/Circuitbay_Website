@@ -59,8 +59,6 @@ export default function Index() {
         </div>
       </div>
 
-
-
       {/* Why you choose us */}
       <div className="bg-foreground-secondary px-8 py-12 h-[500px] flex flex-col justify-between">
         {/* Heading */}
@@ -106,6 +104,51 @@ export default function Index() {
               Join our community of makers and get help with projects and parts.
             </p>
           </div>
+        </div>
+      </div>
+
+      {/* Products */}
+      <div className="bg-foreground-secondary px-6 md:px-12 py-12">
+        {/* Heading */}
+        <div className="text-center max-w-2xl mx-auto">
+          <h1 className="text-3xl md:text-4xl font-bold mb-4">Featured Products</h1>
+          <p className="text-base text-muted-foreground">
+            Explore our most popular electronics and IoT components
+          </p>
+        </div>
+
+        {/* Product Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 max-w-6xl mx-auto mt-12">
+          {/* Card */}
+          {[1, 2, 3, 4].map((item) => (
+            <div
+              key={item}
+              className="bg-secondary rounded-xl shadow-sm hover:shadow-md transition flex flex-col overflow-hidden"
+            >
+              {/* Image */}
+              <div className="h-40 flex items-center justify-center bg-white">
+                <img
+                  src="./images/Circuitbay_icon.png"
+                  alt="Product"
+                  className="h-full object-contain"
+                />
+              </div>
+
+              {/* Content */}
+              <div className="p-5 flex flex-col flex-1 text-center">
+                <h2 className="font-semibold text-lg mb-2">Fast Delivery</h2>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Quick and reliable shipping to get your components when you need them.
+                </p>
+
+                {/* Price + Button */}
+                <div className="mt-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+                  <h3 className="text-lg font-bold">₹450</h3>
+                  <Button className="w-full sm:w-auto px-4">View Details</Button>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 
