@@ -260,9 +260,11 @@ export default function Index() {
             >
               {/* Image */}
               <div className="h-40 flex items-center justify-center bg-white">
-                <img
+                <Image
                   src="/images/Circuitbay_icon.png"
                   alt="Product"
+                  width={160}
+                  height={160}
                   className="h-full object-contain"
                 />
               </div>
@@ -412,7 +414,14 @@ export default function Index() {
 
           {/* Brand + About */}
           <div>
-            <img src="./images/Hero_Logo.png" alt="CircuitBay Logo" className="w-40 mb-4" />
+            <Image
+              src="/images/Hero_Logo.png"
+              alt="Logo"
+              width={160}
+              height={50}
+              priority
+              className="mb-4"
+            />
             <p className="text-sm leading-relaxed">
               Empowering innovation with quality electronics and IoT components.
             </p>
@@ -454,14 +463,14 @@ export default function Index() {
           <div>
             <h3 className="text-lg font-semibold text-white mb-4">Contact Info</h3>
             <ul className="space-y-3 text-sm">
-              <li className="flex items-center gap-2 hover:font-bold">
-                <Instagram className="w-4 h-4" /> <a href="https://www.instagram.com/circuitbayofficial">circuitbayofficial</a>
+              <li className="flex items-center gap-2 hover:text-blue-color">
+                <Instagram className="w-4 h-4" /><a href="https://www.instagram.com/circuitbayofficial">circuitbayofficial</a>
               </li>
-              <li className="flex items-center gap-2 hover:font-bold">
-                <Phone className="w-4 h-4" /> <a href="tel:+91 8281461307">+91 8281461307</a>
+              <li className="flex items-center gap-2 hover:text-blue-color">
+                <Phone className="w-4 h-4" /><a href="tel:+91 8281461307">+91 8281461307</a>
               </li>
-              <li className="flex items-center gap-2 hover:font-bold">
-                <Mail className="w-4 h-4" /> <a href="mailto:circuitbayofficial@gmail.com"></a> circuitbayofficial@gmail.com
+              <li className="flex items-center gap-2 hover:text-blue-color">
+                <Mail className="w-4 h-4" /><a href="mailto:circuitbayofficial@gmail.com">circuitbayofficial@gmail.com</a>
               </li>
             </ul>
           </div>
