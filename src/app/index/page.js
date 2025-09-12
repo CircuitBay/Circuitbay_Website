@@ -380,7 +380,7 @@ export default function Index() {
               icon: Phone,
               title: "Phone",
               desc: "Call us directly",
-              detail: "+91 8075143465",
+              detail: "+91 8281461307",
               color: "bg-blue-color",
             },
           ].map((card, i) => (
@@ -455,7 +455,7 @@ export default function Index() {
                 <Instagram className="w-4 h-4" /> @CircuitBay_Official
               </li>
               <li className="flex items-center gap-2">
-                <Phone className="w-4 h-4" /> +91 8075143465
+                <Phone className="w-4 h-4" /> +91 8281461307
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="w-4 h-4" /> CircuitBayOfficial@gmail.com
