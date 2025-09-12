@@ -2,7 +2,7 @@
 
 import Navbar from "@/components/navbar/navbar";
 import { Button } from "@/components/shadcnui/button";
-import { Award, Component, Microchip, Phone, ShoppingCart, Truck, UsersRound, WifiHigh, Zap } from "lucide-react";
+import { Award, Component, Instagram, Microchip, Phone, ShoppingCart, Truck, UsersRound, WifiHigh, Zap } from "lucide-react";
 
 export default function Index() {
   return (
@@ -150,8 +150,40 @@ export default function Index() {
             </div>
           ))}
         </div>
+
+        {/* View all products */}
+        <div className="flex justify-center mt-15">
+          <Button className="w-full sm:w-auto px-4">View all products</Button>
+        </div>
       </div>
 
+      {/* Follow on Instagram */}
+      <div className="bg-gradient-to-r from-purple-500 to-pink-500 h-[400px] flex items-center justify-center px-6">
+        <div className="text-center max-w-2xl space-y-6">
+          {/* Icon */}
+          <div className="flex items-center justify-center">
+            <div className="bg-white/20 p-4 rounded-full">
+              <Instagram className="w-12 h-12 text-white" />
+            </div>
+          </div>
+
+          {/* Heading */}
+          <h1 className="text-3xl md:text-4xl font-bold text-white">
+            Follow us on Instagram
+          </h1>
+
+          {/* Subtext */}
+          <p className="text-base md:text-lg text-white/90 leading-relaxed">
+            Stay updated with our latest products, project ideas, and electronics tips.
+            Join our community of makers and innovators!
+          </p>
+
+          {/* Button */}
+          <Button className="bg-white text-pink-600 font-semibold px-8 py-3 rounded-lg shadow-md hover:bg-pink-100 transition">
+            @CircuitBay_Official
+          </Button>
+        </div>
+      </div>
 
     </>
   );
