@@ -154,7 +154,7 @@ export default function Index() {
             </h1>
             <p className="text-base lg:text-lg text-white/90 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
               From Arduino boards to sensors, we provide premium electronics and
-              IoT components for your projects. Whether you're a student,
+              IoT components for your projects. Whether you&apos;re a student,
               hobbyist, or developer, build your next breakthrough project with{" "}
               <span className="font-semibold">CircuitBay</span>.
             </p>
@@ -199,7 +199,7 @@ export default function Index() {
             Why choose CircuitBay?
           </h1>
           <p className="text-base text-muted-foreground">
-            We understand the needs of makers, students, and developers. That's
+            We understand the needs of makers, students, and developers. That&apos;s 
             why we curate only the best components for your projects.
           </p>
         </div>
@@ -273,7 +273,7 @@ export default function Index() {
               <div className="p-5 flex flex-col flex-1 text-left">
                 <h2 className="font-semibold text-lg mb-2">Arduino UNO</h2>
                 <p className="text-sm text-muted-foreground mb-4">
-                   Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+                   Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s
                 </p>
                 <div className="mt-auto flex flex-col sm:flex-row items-center justify-between gap-3">
                   <h3 className="text-lg font-bold">₹450</h3>
@@ -324,7 +324,7 @@ export default function Index() {
               and developers across India. <br />
               <br />
               We understand the challenges of finding reliable components for
-              your projects. That's why we carefully curate our inventory to
+              your projects. That$apos;s why we carefully curate our inventory to
               include only the best products from trusted manufacturers.
             </p>
           </div>
@@ -356,7 +356,7 @@ export default function Index() {
           </h1>
           <p className="text-base sm:text-lg text-muted-foreground">
             Have questions about our products or need help with your project?
-            We'd love to hear from you.
+            We&apos;d love to hear from you.
           </p>
         </div>
 
