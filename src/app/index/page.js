@@ -161,13 +161,13 @@ export default function Index() {
             {/* Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Button className="bg-white text-blue-color w-full sm:w-48 lg:w-56 hover:bg-white/20 hover:text-white transition">
-                <Phone className="mr-2" /> Contact Us
+                <Phone className="mr-1" /> <a href="#contact">Contact Us</a>
               </Button>
               <Button
                 variant="outline"
                 className="w-full sm:w-48 lg:w-56 bg-white/20 border-white text-white hover:bg-white hover:text-blue-color transition"
               >
-                <ShoppingCart className="mr-2" /> Shop Components
+                <ShoppingCart className="mr-1" /> Shop Components
               </Button>
             </div>
           </div>
@@ -305,8 +305,8 @@ export default function Index() {
             Stay updated with our latest products, project ideas, and
             electronics tips. Join our community of makers and innovators!
           </p>
-          <Button className="bg-white text-pink-600 font-semibold px-8 py-3 rounded-lg shadow-md hover:bg-pink-100 transition">
-            <Instagram className="mr-2" /> CircuitBay_Official
+          <Button className="bg-white text-pink-600 font-semibold px-8 py-3 rounded-lg shadow-md hover:bg-pink-100 transition" href="">
+            <Instagram className="mr-1" /><a href="https://www.instagram.com/circuitbayofficial">circuitbayofficial</a>
           </Button>
         </div>
       </section>
@@ -366,14 +366,16 @@ export default function Index() {
               icon: Instagram,
               title: "Instagram",
               desc: "Follow us for updates",
-              detail: "@CircuitBay_Official",
+              detail: "circuitbayofficial",
+              link: "https://www.instagram.com/circuitbayofficial",
               color: "bg-blue-color",
             },
             {
               icon: Mail,
               title: "Email",
               desc: "Send us an email",
-              detail: "circuitbay@gmail.com",
+              detail: "circuitbayofficial@gmail.com",
+              link: "mailto:circuitbayofficial@gmail.com",
               color: "bg-blue-color",
             },
             {
@@ -381,6 +383,7 @@ export default function Index() {
               title: "Phone",
               desc: "Call us directly",
               detail: "+91 8281461307",
+              link: "tel:+91 8281461307",
               color: "bg-blue-color",
             },
           ].map((card, i) => (
@@ -397,7 +400,7 @@ export default function Index() {
                 {card.title}
               </h2>
               <p className="text-sm text-muted-foreground">{card.desc}</p>
-              <p className="text-sm font-medium mt-1">{card.detail}</p>
+              <p className="text-sm font-medium mt-1 text-blue-color hover:font-bold"><a href={card.link}>{card.detail}</a></p>
             </div>
           ))}
         </div>
@@ -416,7 +419,7 @@ export default function Index() {
 
             {/* Socials */}
             <div className="flex gap-4 mt-4">
-              <a href="#" className="hover:text-blue-500 transition">
+              <a href="https://www.instagram.com/circuitbayofficial" className="hover:text-blue-500 transition">
                 <Instagram className="w-5 h-5" />
               </a>
               <a href="#" className="hover:text-blue-400 transition">
@@ -451,14 +454,14 @@ export default function Index() {
           <div>
             <h3 className="text-lg font-semibold text-white mb-4">Contact Info</h3>
             <ul className="space-y-3 text-sm">
-              <li className="flex items-center gap-2">
-                <Instagram className="w-4 h-4" /> @CircuitBay_Official
+              <li className="flex items-center gap-2 hover:font-bold">
+                <Instagram className="w-4 h-4" /> <a href="https://www.instagram.com/circuitbayofficial">circuitbayofficial</a>
               </li>
               <li className="flex items-center gap-2">
-                <Phone className="w-4 h-4" /> +91 8281461307
+                <Phone className="w-4 h-4" /> <a href="tel:+91 8281461307">+91 8281461307</a>
               </li>
               <li className="flex items-center gap-2">
-                <Mail className="w-4 h-4" /> CircuitBayOfficial@gmail.com
+                <Mail className="w-4 h-4" /> <a href="mailto:circuitbayofficial@gmail.com"></a> circuitbayofficial@gmail.com
               </li>
             </ul>
           </div>
