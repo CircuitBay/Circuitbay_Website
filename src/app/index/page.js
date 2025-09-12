@@ -436,7 +436,7 @@ export default function Index() {
                 <Link href="/" className="hover:text-blue-500 transition">Home</Link>
               </li>
               <li>
-                <Link href="#product" className="hover:text-blue-500 transition">Product</Link>
+                <Link href="#products" className="hover:text-blue-500 transition">Product</Link>
               </li>
               <li>
                 <Link href="#about" className="hover:text-blue-500 transition">About</Link>
