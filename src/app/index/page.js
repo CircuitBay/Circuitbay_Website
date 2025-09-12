@@ -270,16 +270,14 @@ export default function Index() {
               </div>
 
               {/* Content */}
-              <div className="p-5 flex flex-col flex-1 text-center">
-                <h2 className="font-semibold text-lg mb-2">Fast Delivery</h2>
+              <div className="p-5 flex flex-col flex-1 text-left">
+                <h2 className="font-semibold text-lg mb-2">Arduino UNO</h2>
                 <p className="text-sm text-muted-foreground mb-4">
-                  Quick and reliable shipping to get your components when you
-                  need them.
+                   Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
                 </p>
-
                 <div className="mt-auto flex flex-col sm:flex-row items-center justify-between gap-3">
                   <h3 className="text-lg font-bold">₹450</h3>
-                  <Button className="w-full sm:w-auto px-4">View Details</Button>
+                  <Button className="w-full sm:w-auto px-4 bg-blue-color text:white hover:bg-blue-color/90">View Details</Button>
                 </div>
               </div>
             </div>
@@ -288,7 +286,7 @@ export default function Index() {
 
         {/* View all */}
         <div className="flex justify-center mt-12">
-          <Button className="w-full sm:w-auto px-6">View all products</Button>
+          <Button className="w-full sm:w-auto px-6 bg-blue-color text:white hover:bg-blue-color/90">View all products</Button>
         </div>
       </section>
 
