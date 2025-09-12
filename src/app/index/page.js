@@ -457,10 +457,10 @@ export default function Index() {
               <li className="flex items-center gap-2 hover:font-bold">
                 <Instagram className="w-4 h-4" /> <a href="https://www.instagram.com/circuitbayofficial">circuitbayofficial</a>
               </li>
-              <li className="flex items-center gap-2">
+              <li className="flex items-center gap-2 hover:font-bold">
                 <Phone className="w-4 h-4" /> <a href="tel:+91 8281461307">+91 8281461307</a>
               </li>
-              <li className="flex items-center gap-2">
+              <li className="flex items-center gap-2 hover:font-bold">
                 <Mail className="w-4 h-4" /> <a href="mailto:circuitbayofficial@gmail.com"></a> circuitbayofficial@gmail.com
               </li>
             </ul>
