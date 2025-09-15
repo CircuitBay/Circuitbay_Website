@@ -324,7 +324,7 @@ export default function Index() {
               and developers across India. <br />
               <br />
               We understand the challenges of finding reliable components for
-              your projects. That$apos;s why we carefully curate our inventory to
+              your projects. That&apos;s why we carefully curate our inventory to
               include only the best products from trusted manufacturers.
             </p>
           </div>
