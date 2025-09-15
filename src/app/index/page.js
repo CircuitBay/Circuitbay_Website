@@ -102,8 +102,9 @@ export default function Index() {
 
       {/* Mobile Sidebar */}
       <div
-        className={`fixed top-0 left-0 min-h-screen w-64 bg-secondary shadow-lg transform transition-transform duration-300 ease-in-out ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
-          } lg:hidden z-50`}
+        className={`fixed top-0 left-0 min-h-screen w-64 bg-secondary shadow-lg transform transition-transform duration-300 ease-in-out ${
+          isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
+        } lg:hidden z-50`}
       >
         <div className="flex flex-row items-center border-b pb-4">
           <Link href="/" className="cursor-pointer pt-4 ps-4">
@@ -160,14 +161,22 @@ export default function Index() {
             </p>
             {/* Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Button className="bg-white text-blue-color w-full sm:w-48 lg:w-56 hover:bg-white/20 hover:text-white transition">
-                <Phone className="mr-1" /> <a href="#contact">Contact Us</a>
+              <Button
+                asChild
+                className="bg-white text-blue-color w-full sm:w-48 lg:w-56 hover:bg-white/20 hover:text-white transition"
+              >
+                <Link href="#contact">
+                  <Phone className="mr-1" /> Contact Us
+                </Link>
               </Button>
               <Button
+                asChild
                 variant="outline"
                 className="w-full sm:w-48 lg:w-56 bg-white/20 border-white text-white hover:bg-white hover:text-blue-color transition"
               >
-                <ShoppingCart className="mr-1" /> Shop Components
+                <Link href="/">
+                  <ShoppingCart className="mr-1" /> Shop Components
+                </Link>
               </Button>
             </div>
           </div>
@@ -185,7 +194,9 @@ export default function Index() {
                 className="bg-secondary h-28 sm:h-32 flex flex-col items-center justify-center rounded-lg shadow-sm hover:shadow-md transition hover:bg-secondary/20"
               >
                 <item.icon size={28} className="mb-2 sm:mb-3 text-blue-color" />
-                <p className="text-sm sm:text-base font-medium text-blue-color">{item.label}</p>
+                <p className="text-sm sm:text-base font-medium text-blue-color">
+                  {item.label}
+                </p>
               </div>
             ))}
           </div>
@@ -199,8 +210,9 @@ export default function Index() {
             Why choose CircuitBay?
           </h1>
           <p className="text-base text-muted-foreground">
-            We understand the needs of makers, students, and developers. That&apos;s 
-            why we curate only the best components for your projects.
+            We understand the needs of makers, students, and developers.
+            That&apos;s why we curate only the best components for your
+            projects.
           </p>
         </div>
 
@@ -242,7 +254,10 @@ export default function Index() {
       </section>
 
       {/* Products */}
-      <section id="products" className="bg-foreground-secondary px-6 md:px-12 py-16">
+      <section
+        id="products"
+        className="bg-foreground-secondary px-6 md:px-12 py-16"
+      >
         <div className="text-center max-w-2xl mx-auto">
           <h1 className="text-3xl md:text-4xl font-bold mb-4">
             Featured Products
@@ -273,11 +288,14 @@ export default function Index() {
               <div className="p-5 flex flex-col flex-1 text-left">
                 <h2 className="font-semibold text-lg mb-2">Arduino UNO</h2>
                 <p className="text-sm text-muted-foreground mb-4">
-                   Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s
+                  Lorem Ipsum has been the industry&apos;s standard dummy text
+                  ever since the 1500s
                 </p>
                 <div className="mt-auto flex flex-col sm:flex-row items-center justify-between gap-3">
                   <h3 className="text-lg font-bold">₹450</h3>
-                  <Button className="w-full sm:w-auto px-4 bg-blue-color text:white hover:bg-blue-color/90">View Details</Button>
+                  <Button className="w-full sm:w-auto px-4 bg-blue-color text:white hover:bg-blue-color/90">
+                    View Details
+                  </Button>
                 </div>
               </div>
             </div>
@@ -286,7 +304,9 @@ export default function Index() {
 
         {/* View all */}
         <div className="flex justify-center mt-12">
-          <Button className="w-full sm:w-auto px-6 bg-blue-color text:white hover:bg-blue-color/90">View all products</Button>
+          <Button className="w-full sm:w-auto px-6 bg-blue-color text:white hover:bg-blue-color/90">
+            View all products
+          </Button>
         </div>
       </section>
 
@@ -305,14 +325,22 @@ export default function Index() {
             Stay updated with our latest products, project ideas, and
             electronics tips. Join our community of makers and innovators!
           </p>
-          <Button className="bg-white text-pink-600 font-semibold px-8 py-3 rounded-lg shadow-md hover:bg-pink-100 transition" href="">
-            <Instagram className="mr-1" /><a href="https://www.instagram.com/circuitbayofficial">circuitbayofficial</a>
+          <Button
+            asChild
+            className="bg-white text-pink-600 font-semibold px-8 py-3 rounded-lg shadow-md hover:bg-pink-100 transition"
+          >
+            <a href="https://www.instagram.com/circuitbayofficial">
+              <Instagram className="mr-1" /> circuitbayofficial
+            </a>
           </Button>
         </div>
       </section>
 
       {/* About Section */}
-      <section id="about" className="px-6 md:px-12 lg:px-20 py-16 bg-foreground-secondary">
+      <section
+        id="about"
+        className="px-6 md:px-12 lg:px-20 py-16 bg-foreground-secondary"
+      >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-7xl mx-auto items-center">
           <div className="space-y-6 text-center lg:text-left">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-secondary-foreground leading-tight">
@@ -324,14 +352,18 @@ export default function Index() {
               and developers across India. <br />
               <br />
               We understand the challenges of finding reliable components for
-              your projects. That&apos;s why we carefully curate our inventory to
-              include only the best products from trusted manufacturers.
+              your projects. That&apos;s why we carefully curate our inventory
+              to include only the best products from trusted manufacturers.
             </p>
           </div>
 
           <div className="grid grid-cols-2 gap-4 sm:gap-6">
             {[
-              { icon: GraduationCap, label: "Students", color: "text-blue-color" },
+              {
+                icon: GraduationCap,
+                label: "Students",
+                color: "text-blue-color",
+              },
               { icon: Hammer, label: "Hobbyists", color: "text-blue-color" },
               { icon: Braces, label: "Developers", color: "text-blue-color" },
               { icon: Lightbulb, label: "Tinkerers", color: "text-blue-color" },
@@ -400,7 +432,9 @@ export default function Index() {
                 {card.title}
               </h2>
               <p className="text-sm text-muted-foreground">{card.desc}</p>
-              <p className="text-sm font-medium mt-1 text-blue-color hover:font-bold"><a href={card.link}>{card.detail}</a></p>
+              <p className="text-sm font-medium mt-1 text-blue-color hover:font-bold">
+                <a href={card.link}>{card.detail}</a>
+              </p>
             </div>
           ))}
         </div>
@@ -409,7 +443,6 @@ export default function Index() {
       {/* Footer */}
       <footer className="bg-gray-900 text-gray-300">
         <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-
           {/* Brand + About */}
           <div>
             <Image
@@ -426,7 +459,10 @@ export default function Index() {
 
             {/* Socials */}
             <div className="flex gap-4 mt-4">
-              <a href="https://www.instagram.com/circuitbayofficial" className="hover:text-blue-500 transition">
+              <a
+                href="https://www.instagram.com/circuitbayofficial"
+                className="hover:text-blue-500 transition"
+              >
                 <Instagram className="w-5 h-5" />
               </a>
               <a href="#" className="hover:text-blue-400 transition">
@@ -440,35 +476,60 @@ export default function Index() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold text-white mb-4">Quick Links</h3>
+            <h3 className="text-lg font-semibold text-white mb-4">
+              Quick Links
+            </h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/" className="hover:text-blue-500 transition">Home</Link>
+                <Link href="/" className="hover:text-blue-500 transition">
+                  Home
+                </Link>
               </li>
               <li>
-                <Link href="#products" className="hover:text-blue-500 transition">Product</Link>
+                <Link
+                  href="#products"
+                  className="hover:text-blue-500 transition"
+                >
+                  Product
+                </Link>
               </li>
               <li>
-                <Link href="#about" className="hover:text-blue-500 transition">About</Link>
+                <Link href="#about" className="hover:text-blue-500 transition">
+                  About
+                </Link>
               </li>
               <li>
-                <Link href="#contact" className="hover:text-blue-500 transition">Contact</Link>
+                <Link
+                  href="#contact"
+                  className="hover:text-blue-500 transition"
+                >
+                  Contact
+                </Link>
               </li>
             </ul>
           </div>
 
           {/* Contact Info */}
           <div>
-            <h3 className="text-lg font-semibold text-white mb-4">Contact Info</h3>
+            <h3 className="text-lg font-semibold text-white mb-4">
+              Contact Info
+            </h3>
             <ul className="space-y-3 text-sm">
               <li className="flex items-center gap-2 hover:text-blue-color">
-                <Instagram className="w-4 h-4" /><a href="https://www.instagram.com/circuitbayofficial">circuitbayofficial</a>
+                <Instagram className="w-4 h-4" />
+                <a href="https://www.instagram.com/circuitbayofficial">
+                  circuitbayofficial
+                </a>
               </li>
               <li className="flex items-center gap-2 hover:text-blue-color">
-                <Phone className="w-4 h-4" /><a href="tel:+91 8281461307">+91 8281461307</a>
+                <Phone className="w-4 h-4" />
+                <a href="tel:+91 8281461307">+91 8281461307</a>
               </li>
               <li className="flex items-center gap-2 hover:text-blue-color">
-                <Mail className="w-4 h-4" /><a href="mailto:circuitbayofficial@gmail.com">circuitbayofficial@gmail.com</a>
+                <Mail className="w-4 h-4" />
+                <a href="mailto:circuitbayofficial@gmail.com">
+                  circuitbayofficial@gmail.com
+                </a>
               </li>
             </ul>
           </div>
@@ -476,11 +537,14 @@ export default function Index() {
 
         {/* Bottom bar */}
         <div className="border-t border-gray-700 py-4 text-center text-sm text-gray-400">
-          © 2025 <span className="text-white font-semibold">CircuitBay</span>. All rights reserved.
-          <span className="block sm:inline"> Built with ❤️ for makers and innovators.</span>
+          © 2025 <span className="text-white font-semibold">CircuitBay</span>.
+          All rights reserved.
+          <span className="block sm:inline">
+            {" "}
+            Built with ❤️ for makers and innovators.
+          </span>
         </div>
       </footer>
-
     </>
   );
 }
