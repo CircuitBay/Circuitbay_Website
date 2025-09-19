@@ -286,7 +286,7 @@ export default function Index() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto px-4 mt-12">
           {stockList.length === 0 ? (
-            <p className="text-center text-gray-500">Loading stock list...</p>
+            <p className="text-center text-gray-500 animate-pulse text-sm">Loading stock list...</p>
           ) : (
             <>
               {stockList.slice(0, 4).map((item, index) => (
