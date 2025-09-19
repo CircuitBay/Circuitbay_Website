@@ -289,48 +289,51 @@ export default function Index() {
             <p className="text-center text-gray-500 animate-pulse text-sm">Loading stock list...</p>
           ) : (
             <>
-              {stockList.slice(0, 4).map((item, index) => (
-                <div
-                  key={index}
-                  className="bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col overflow-hidden border border-gray-100"
-                >
-                  {/* Image */}
-                  <div className="h-44 flex items-center justify-center bg-gray-50">
-                    <Image
-                      src="/images/Circuitbay_icon.png"
-                      alt={item["Component Name"]}
-                      width={160}
-                      height={160}
-                      className="h-full object-contain p-4"
-                    />
-                  </div>
+              {stockList
+                .filter((item) => item["Stock Left"] > 0) // remove items with 0 stock
+                .slice(0, 4) // still limit to 4
+                .map((item, index) => (
+                  <div
+                    key={index}
+                    className="bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col overflow-hidden border border-gray-100"
+                  >
+                    {/* Image */}
+                    <div className="h-44 flex items-center justify-center bg-gray-50">
+                      <Image
+                        src="/images/Circuitbay_icon.png"
+                        alt={item["Component Name"]}
+                        width={160}
+                        height={160}
+                        className="h-full object-contain p-4"
+                      />
+                    </div>
 
-                  {/* Content */}
-                  <div className="p-5 flex flex-col flex-1 text-left">
-                    <h2 className="font-semibold text-lg mb-2 text-gray-800">
-                      {item["Component Name"]}{" "}
-                      <span className="text-sm text-gray-500">({item.Category})</span>
-                    </h2>
+                    {/* Content */}
+                    <div className="p-5 flex flex-col flex-1 text-left">
+                      <h2 className="font-semibold text-lg mb-2 text-gray-800">
+                        {item["Component Name"]}{" "}
+                        <span className="text-sm text-gray-500">({item.Category})</span>
+                      </h2>
 
-                    <p className="text-sm text-gray-600 mb-4 line-clamp-2">
-                      Lorem Ipsum has been the industry&apos;s standard dummy text ever
-                      since the 1500s.
-                    </p>
+                      <p className="text-sm text-gray-600 mb-4 line-clamp-2">
+                        Lorem Ipsum has been the industry&apos;s standard dummy text ever
+                        since the 1500s.
+                      </p>
 
-                    <div className="mt-auto flex flex-col sm:flex-row items-center justify-between gap-3">
-                      <h3 className="text-lg font-bold text-blue-color">
-                        ₹{item.Price}{" "}
-                        <span className="text-sm font-medium text-gray-500">
-                          | Stock: {item["Stock Left"]}
-                        </span>
-                      </h3>
-                      <Button className="w-full sm:w-auto px-5 py-2 rounded-xl bg-blue-color text-white hover:bg-blue-color/90 transition-colors">
-                        Contact Us
-                      </Button>
+                      <div className="mt-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+                        <h3 className="text-lg font-bold text-blue-color">
+                          ₹{item.Price}{" "}
+                          <span className="text-sm font-medium text-gray-500">
+                            | Stock: {item["Stock Left"]}
+                          </span>
+                        </h3>
+                        <Button className="w-full sm:w-auto px-5 py-2 rounded-xl bg-blue-color text-white hover:bg-blue-color/90 transition-colors">
+                          Contact Us
+                        </Button>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
             </>
           )}
         </div>
