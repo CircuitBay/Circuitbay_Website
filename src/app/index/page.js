@@ -330,7 +330,7 @@ export default function Index() {
                         </h3>
                         <Button asChild className="w-full sm:w-auto px-5 py-2 rounded-xl bg-blue-color text-white hover:bg-blue-color/90 transition-colors">
                           <a
-                            href={`//api.whatsapp.com/send?phone=918075143465&text=Hi, I would love to buy/know about this ${encodeURIComponent(item["Component Name"])}`}
+                            href={`//api.whatsapp.com/send?phone=918281461307&text=Hi, I would love to buy/know about this ${encodeURIComponent(item["Component Name"])}`}
                             target="_blank"
                             rel="noopener noreferrer"
                           >
