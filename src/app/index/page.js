@@ -36,6 +36,24 @@ export default function Index() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
 
+  // Get stock list
+  const [stockList, setStocklist] = useState([]);
+
+  const getStockList = async () => {
+    try {
+      const res = await fetch("https://script.google.com/macros/s/AKfycbxEpq5vk7RTlfxiSlZDqa8xIGbNre_c_rSxdpEeRXpuDIn4PFb-zRx6V11QsaV-1zmfww/exec?path=Stock%20Status%20List");
+      const listItems = await res.json();
+      // console.log("listItems: ", listItems);
+      setStocklist(listItems.data);
+    } catch (err) {
+      console.error("Error fetching stock list:", err);
+    }
+  };
+
+  useEffect(() => {
+    getStockList();
+  }, []); // run once when component mounts
+
   // Avoid hydration mismatch
   const [isMounted, setIsMounted] = useState(false);
   useEffect(() => setIsMounted(true), []);
@@ -102,9 +120,8 @@ export default function Index() {
 
       {/* Mobile Sidebar */}
       <div
-        className={`fixed top-0 left-0 min-h-screen w-64 bg-secondary shadow-lg transform transition-transform duration-300 ease-in-out ${
-          isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
-        } lg:hidden z-50`}
+        className={`fixed top-0 left-0 min-h-screen w-64 bg-secondary shadow-lg transform transition-transform duration-300 ease-in-out ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
+          } lg:hidden z-50`}
       >
         <div className="flex flex-row items-center border-b pb-4">
           <Link href="/" className="cursor-pointer pt-4 ps-4">
@@ -267,39 +284,55 @@ export default function Index() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 max-w-6xl mx-auto mt-12">
-          {[1, 2, 3, 4].map((item) => (
-            <div
-              key={item}
-              className="bg-secondary rounded-xl shadow-sm hover:shadow-md transition flex flex-col overflow-hidden"
-            >
-              {/* Image */}
-              <div className="h-40 flex items-center justify-center bg-white">
-                <Image
-                  src="/images/Circuitbay_icon.png"
-                  alt="Product"
-                  width={160}
-                  height={160}
-                  className="h-full object-contain"
-                />
-              </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto px-4 mt-12">
+          {stockList.length === 0 ? (
+            <p className="text-center text-gray-500">Loading stock list...</p>
+          ) : (
+            <>
+              {stockList.slice(0, 4).map((item, index) => (
+                <div
+                  key={index}
+                  className="bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col overflow-hidden border border-gray-100"
+                >
+                  {/* Image */}
+                  <div className="h-44 flex items-center justify-center bg-gray-50">
+                    <Image
+                      src="/images/Circuitbay_icon.png"
+                      alt={item["Component Name"]}
+                      width={160}
+                      height={160}
+                      className="h-full object-contain p-4"
+                    />
+                  </div>
 
-              {/* Content */}
-              <div className="p-5 flex flex-col flex-1 text-left">
-                <h2 className="font-semibold text-lg mb-2">Arduino UNO</h2>
-                <p className="text-sm text-muted-foreground mb-4">
-                  Lorem Ipsum has been the industry&apos;s standard dummy text
-                  ever since the 1500s
-                </p>
-                <div className="mt-auto flex flex-col sm:flex-row items-center justify-between gap-3">
-                  <h3 className="text-lg font-bold">₹450</h3>
-                  <Button className="w-full sm:w-auto px-4 bg-blue-color text:white hover:bg-blue-color/90">
-                    View Details
-                  </Button>
+                  {/* Content */}
+                  <div className="p-5 flex flex-col flex-1 text-left">
+                    <h2 className="font-semibold text-lg mb-2 text-gray-800">
+                      {item["Component Name"]}{" "}
+                      <span className="text-sm text-gray-500">({item.Category})</span>
+                    </h2>
+
+                    <p className="text-sm text-gray-600 mb-4 line-clamp-2">
+                      Lorem Ipsum has been the industry&apos;s standard dummy text ever
+                      since the 1500s.
+                    </p>
+
+                    <div className="mt-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+                      <h3 className="text-lg font-bold text-blue-color">
+                        ₹{item.Price}{" "}
+                        <span className="text-sm font-medium text-gray-500">
+                          | Stock: {item["Stock Left"]}
+                        </span>
+                      </h3>
+                      <Button className="w-full sm:w-auto px-5 py-2 rounded-xl bg-blue-color text-white hover:bg-blue-color/90 transition-colors">
+                        Contact Us
+                      </Button>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          ))}
+              ))}
+            </>
+          )}
         </div>
 
         {/* View all */}
