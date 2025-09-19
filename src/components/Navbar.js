@@ -1,10 +1,7 @@
 "use client";
 
 import { Button } from "@/components/shadcnui/button";
-import {
-    Menu,
-    X,
-} from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import {
     NavigationMenu,
@@ -14,35 +11,48 @@ import {
 } from "@/components/shadcnui/navigation-menu";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
-
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
 
-    const navbarLinks = [
-        { name: "Home", href: "/" },
-        { name: "About", href: "#about" },
-        { name: "Products", href: "#products" },
-        { name: "Contact", href: "#contact" },
-    ];
+    const pathName = usePathname();
+    console.log("pathName: ", pathName);
+
+    let navbarLinks = [];
+
+    if (pathName === "/products") {
+        navbarLinks = [
+            { name: "Home", href: "/" },
+        ];
+    } else {
+        navbarLinks = [
+            { name: "Home", href: "/" },
+            { name: "About", href: "#about" },
+            { name: "Products", href: "#products" },
+            { name: "Contact", href: "#contact" },
+        ];
+    }
+
     return (
         <>
             {/* Navbar */}
-            < nav className="p-4 bg-secondary flex justify-between items-center sticky top-0 z-50 shadow-sm" >
+            <nav className="p-4 bg-secondary flex justify-between items-center sticky top-0 z-50 shadow-sm">
                 {/* Logo */}
-                < div >
-                    <Image
-                        src="/images/Hero_Logo.png"
-                        alt="Logo"
-                        width={160}
-                        height={50}
-                        priority
-                    />
-                </div >
+                <div>
+                    <Link href="/" className="cursor-pointer">
+                        <Image
+                            src="/images/Hero_Logo.png"
+                            alt="Logo"
+                            width={160}
+                            height={50}
+                        />
+                    </Link>
+                </div>
 
                 {/* Desktop Menu */}
-                < div className="hidden lg:flex" >
+                <div className="hidden lg:flex">
                     <NavigationMenu>
                         <NavigationMenuList>
                             {navbarLinks.map((link) => (
@@ -62,10 +72,10 @@ export default function Navbar() {
                             ))}
                         </NavigationMenuList>
                     </NavigationMenu>
-                </div >
+                </div>
 
                 {/* Mobile Toggle Button */}
-                < div className="lg:hidden" >
+                <div className="lg:hidden">
                     <Button
                         variant="secondary"
                         size="icon"
@@ -75,14 +85,13 @@ export default function Navbar() {
                     >
                         <Menu />
                     </Button>
-                </div >
-            </nav >
+                </div>
+            </nav>
 
             {/* Mobile Sidebar */}
-            < div
+            <div
                 className={`fixed top-0 left-0 min-h-screen w-64 bg-secondary shadow-lg transform transition-transform duration-300 ease-in-out ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
-                    } lg:hidden z-50`
-                }
+                    } lg:hidden z-50`}
             >
                 <div className="flex flex-row items-center border-b pb-4">
                     <Link href="/" className="cursor-pointer pt-4 ps-4">
@@ -120,7 +129,7 @@ export default function Navbar() {
                         </li>
                     ))}
                 </ul>
-            </div >
+            </div>
         </>
-    )
+    );
 }
