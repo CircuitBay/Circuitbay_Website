@@ -316,10 +316,10 @@ export default function Index() {
                         <span className="text-sm text-gray-500">({item.Category})</span>
                       </h2>
 
-                      <p className="text-sm text-gray-600 mb-4 line-clamp-2">
+                      {/* <p className="text-sm text-gray-600 mb-4 line-clamp-2">
                         Lorem Ipsum has been the industry&apos;s standard dummy text ever
                         since the 1500s.
-                      </p>
+                      </p> */}
 
                       <div className="mt-auto flex flex-col sm:flex-row items-center justify-between gap-3">
                         <h3 className="text-lg font-bold text-blue-color">
@@ -334,7 +334,7 @@ export default function Index() {
                             target="_blank"
                             rel="noopener noreferrer"
                           >
-                            <MessageCircle/>
+                            <MessageCircle />
                           </a>
                         </Button>
                       </div>
