@@ -105,7 +105,7 @@ export default function Index() {
                 variant="outline"
                 className="w-full sm:w-48 lg:w-56 bg-white/20 border-white text-white hover:bg-white hover:text-blue-color transition"
               >
-                <Link href="/">
+                <Link href="/products">
                   <ShoppingCart className="mr-1" /> Shop Components
                 </Link>
               </Button>
