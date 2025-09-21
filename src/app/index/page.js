@@ -214,10 +214,10 @@ export default function Index() {
                     {/* Image */}
                     <div className="h-44 flex items-center justify-center bg-gray-50">
                       <Image
-                        src="/images/Circuitbay_icon.png"
+                        src={item["Image"]}
                         alt={item["Component Name"]}
-                        width={160}
-                        height={160}
+                        width={180}
+                        height={180}
                         className="h-full object-contain p-4"
                       />
                     </div>
