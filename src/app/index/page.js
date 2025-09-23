@@ -493,8 +493,7 @@ export default function Index() {
 
         {/* Bottom bar */}
         <div className="border-t border-gray-700 py-4 text-center text-sm text-gray-400">
-          © 2025 <span className="text-white font-semibold">CircuitBay</span>.
-          All rights reserved.
+          © {new Date().getFullYear()} <span className="text-white font-semibold">CircuitBay</span>. All rights reserved.
           <span className="block sm:inline">
             {" "}
             Built with ❤️ for makers and innovators.
