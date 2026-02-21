@@ -1,5 +1,4 @@
 import {
-  Package,
   Zap,
   CircuitBoard,
   Radar,
@@ -7,6 +6,8 @@ import {
   BatteryCharging,
   Cog,
   Cpu,
+  Monitor,
+  SlidersHorizontal,
 } from "lucide-react";
 
 export const API_BASE = "https://admin.circuitbay.org/api/public";
@@ -18,16 +19,6 @@ export const EMAIL = "circuitbayofficial@gmail.com";
 export const PHONE = "+918281461307";
 export const PHONE_DISPLAY = "+91 82814 61307";
 
-export const CATEGORIES = [
-  { key: "all", label: "All", icon: Package },
-  { key: "Electronics", label: "Electronics", icon: Zap },
-  { key: "Development Boards", label: "Dev Boards", icon: CircuitBoard },
-  { key: "Sensors", label: "Sensors", icon: Radar },
-  { key: "Cables & Connectors", label: "Cables", icon: Cable },
-  { key: "Power Supply", label: "Power", icon: BatteryCharging },
-  { key: "Actuators", label: "Actuators", icon: Cog },
-];
-
 export const CATEGORY_ICON_MAP = {
   Electronics: Zap,
   "Development Boards": CircuitBoard,
@@ -35,6 +26,8 @@ export const CATEGORY_ICON_MAP = {
   "Cables & Connectors": Cable,
   "Power Supply": BatteryCharging,
   Actuators: Cog,
+  "Peripheral Devices": Monitor,
+  "Controllers & Drivers": SlidersHorizontal,
 };
 
 export function getCategoryIcon(category) {

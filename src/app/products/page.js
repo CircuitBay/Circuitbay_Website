@@ -5,6 +5,7 @@ import {
   ArrowLeft,
   Search,
   X,
+  Package,
   PackageOpen,
   ChevronLeft,
   ChevronRight,
@@ -16,7 +17,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ProductCard, ProductSkeleton } from "@/components/ProductCard";
 import { usePreloader } from "@/hooks/usePreloader";
-import { API_BASE, CATEGORIES } from "@/lib/constants";
+import { API_BASE, getCategoryIcon } from "@/lib/constants";
 
 const PAGE_SIZE = 12;
 
@@ -28,7 +29,7 @@ export default function Products() {
 
   const [searchQuery, setSearchQuery] = useState("");
   const [debouncedSearch, setDebouncedSearch] = useState("");
-  const [activeCategory, setActiveCategory] = useState("all");
+  const [activeCategory, setActiveCategory] = useState("");
   const [page, setPage] = useState(1);
   const searchInputRef = useRef(null);
   const debounceRef = useRef(null);
@@ -40,7 +41,7 @@ export default function Products() {
         page: String(currentPage),
         limit: String(PAGE_SIZE),
       });
-      if (category && category !== "all") {
+      if (category) {
         params.set("category", category);
       }
       const q = search.trim();
@@ -79,16 +80,17 @@ export default function Products() {
   const clearFilters = () => {
     setSearchQuery("");
     setDebouncedSearch("");
-    setActiveCategory("all");
+    setActiveCategory("");
     setPage(1);
     searchInputRef.current?.focus();
   };
 
   const hasActiveFilters =
-    searchQuery.trim() !== "" || activeCategory !== "all";
+    searchQuery.trim() !== "" || activeCategory !== "";
 
   const totalPages = meta?.totalPages || 1;
   const totalDocs = meta?.totalDocs || 0;
+  const apiCategories = meta?.categories || [];
 
   if (isLoading) return <PreLoader />;
 
@@ -154,20 +156,54 @@ export default function Products() {
       <div className="sticky top-16 z-30 bg-white/80 backdrop-blur-xl border-b border-border/60">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-2 py-3 overflow-x-auto no-scrollbar">
-            {CATEGORIES.map((cat) => {
-              const isActive = activeCategory === cat.key;
+            {/* "All" pill */}
+            <button
+              onClick={() => handleCategoryChange("")}
+              className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200 ${
+                activeCategory === ""
+                  ? "bg-brand text-white shadow-md shadow-brand/25"
+                  : "bg-secondary text-muted-foreground hover:bg-secondary/80 hover:text-foreground"
+              }`}
+            >
+              <Package className="w-3.5 h-3.5" />
+              All
+              {totalDocs > 0 && (
+                <span
+                  className={`text-xs tabular-nums ${
+                    activeCategory === ""
+                      ? "text-white/70"
+                      : "text-muted-foreground/60"
+                  }`}
+                >
+                  {totalDocs}
+                </span>
+              )}
+            </button>
+
+            {apiCategories.map((cat) => {
+              const isActive = activeCategory === cat.slug;
+              const Icon = getCategoryIcon(cat.name);
               return (
                 <button
-                  key={cat.key}
-                  onClick={() => handleCategoryChange(cat.key)}
+                  key={cat.slug}
+                  onClick={() => handleCategoryChange(cat.slug)}
                   className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-200 ${
                     isActive
                       ? "bg-brand text-white shadow-md shadow-brand/25"
                       : "bg-secondary text-muted-foreground hover:bg-secondary/80 hover:text-foreground"
                   }`}
                 >
-                  <cat.icon className="w-3.5 h-3.5" />
-                  {cat.label}
+                  <Icon className="w-3.5 h-3.5" />
+                  {cat.name}
+                  <span
+                    className={`text-xs tabular-nums ${
+                      isActive
+                        ? "text-white/70"
+                        : "text-muted-foreground/60"
+                    }`}
+                  >
+                    {cat.count}
+                  </span>
                 </button>
               );
             })}
