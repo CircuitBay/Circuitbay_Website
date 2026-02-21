@@ -45,7 +45,7 @@ export default function Index() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await fetch(`${API_BASE}/products?limit=4`);
+        const res = await fetch(`${API_BASE}/products?limit=4&featured=true`);
         const data = await res.json();
         setStocklist(data.products);
       } catch (err) {
