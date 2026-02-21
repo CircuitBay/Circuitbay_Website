@@ -1,12 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        remotePatterns: [new URL('https://raw.githubusercontent.com/CircuitBay/Product_Images/refs/heads/master/product_images/*')],
+        remotePatterns: [
+            new URL('https://cdn.circuitbay.org/*'),
+        ],
     },
-    // Method 2
-    // images: {
-    //     domains: ["raw.githubusercontent.com"],
-    // },
 };
 
 
