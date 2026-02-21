@@ -1,51 +1,22 @@
 import "./globals.css";
-import localFont from "next/font/local";
+import { Inter } from "next/font/google";
 
-const openSans = localFont({
-  src: [
-    {
-      path: "/fonts/OpenSans-Light.ttf",
-      weight: "300",
-      style: "normal",
-    },
-    {
-      path: "/fonts/OpenSans-Regular.ttf",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "/fonts/OpenSans-Medium.ttf",
-      weight: "500",
-      style: "normal",
-    },
-    {
-      path: "/fonts/OpenSans-SemiBold.ttf",
-      weight: "600",
-      style: "normal",
-    },
-    {
-      path: "/fonts/OpenSans-Bold.ttf",
-      weight: "700",
-      style: "normal",
-    },
-    {
-      path: "/fonts/OpenSans-ExtraBold.ttf",
-      weight: "800",
-      style: "normal",
-    },
-  ],
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
 });
 
 export const metadata = {
-  title: "CircuitBay",
+  title: "CircuitBay - Quality Electronics & IoT Components",
   description:
-    "CircuitBay is an e-commerce marketplace for IoT modules, sensors, microcontrollers, robotics parts, development boards, and electronics accessories.",
+    "India's trusted marketplace for IoT modules, sensors, microcontrollers, robotics parts, development boards, and electronics accessories. Quality components for students, hobbyists, and developers.",
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={openSans.className}>
+      <body className={`${inter.variable} font-sans`}>
         {children}
       </body>
     </html>

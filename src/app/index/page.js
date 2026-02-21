@@ -3,129 +3,214 @@
 import { Button } from "@/components/shadcnui/button";
 import {
   Award,
-  Braces,
+  ArrowRight,
+  Cpu,
   Component,
-  GraduationCap,
-  Hammer,
   Instagram,
-  Lightbulb,
   Mail,
-  Microchip,
   Phone,
+  Rocket,
   ShoppingCart,
   Truck,
   UsersRound,
-  WifiHigh,
+  Wifi,
   Zap,
-  Facebook,
-  Twitter,
-  MessageCircle,
+  GraduationCap,
+  Wrench,
+  Code2,
+  Lightbulb,
+  ChevronRight,
+  ExternalLink,
 } from "lucide-react";
 import { useState, useEffect } from "react";
-
 import Link from "next/link";
-import Image from "next/image";
 import PreLoader from "@/components/PreLoader";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import { ProductCard, ProductSkeleton } from "@/components/ProductCard";
+import { usePreloader } from "@/hooks/usePreloader";
+import {
+  API_BASE,
+  INSTAGRAM_URL,
+  INSTAGRAM_HANDLE,
+  EMAIL,
+  PHONE,
+  PHONE_DISPLAY,
+} from "@/lib/constants";
 
 export default function Index() {
-
-  const [isLoading, setIsLoading] = useState(true);
-
-  // Preloader
-  useEffect(() => {
-    window.addEventListener("load", () => {
-      setIsLoading(false);
-    });
-    const timeout = setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
-
-    return () => clearTimeout(timeout);
-  }, []);
-
-  // Get stock list
+  const isLoading = usePreloader();
   const [stockList, setStocklist] = useState([]);
 
-  const getStockList = async () => {
-    try {
-      const res = await fetch("https://admin.circuitbay.org/api/public/products");
-      const data = await res.json();
-      setStocklist(data.products);
-    } catch (err) {
-      console.error("Error fetching stock list:", err);
-    }
-  };
-
   useEffect(() => {
-    getStockList();
-  }, []); // run once when component mounts
+    const fetchProducts = async () => {
+      try {
+        const res = await fetch(`${API_BASE}/products?limit=4`);
+        const data = await res.json();
+        setStocklist(data.products);
+      } catch (err) {
+        console.error("Error fetching stock list:", err);
+      }
+    };
+    fetchProducts();
+  }, []);
 
-  // Avoid hydration mismatch
   const [isMounted, setIsMounted] = useState(false);
   useEffect(() => setIsMounted(true), []);
   if (!isMounted) return null;
-
-  // Added preloader
-  if (isLoading) {
-    return <PreLoader />
-  }
+  if (isLoading) return <PreLoader />;
 
   return (
     <>
       <Navbar />
-      {/* Hero section */}
-      <section className="bg-gradient-to-r from-blue-500 to-blue-400 px-6 md:px-12 lg:px-20 py-16 md:py-24 text-white">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-7xl mx-auto items-center">
-          {/* Left side */}
-          <div className="space-y-6 text-center lg:text-left">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight">
-              Power your Innovation <br className="hidden sm:block" />
-              with Quality Components
-            </h1>
-            <p className="text-base lg:text-lg text-white/90 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-              From Arduino boards to sensors, we provide premium electronics and
-              IoT components for your projects. Whether you&apos;re a student,
-              hobbyist, or developer, build your next breakthrough project with{" "}
-              <span className="font-semibold">CircuitBay</span>.
-            </p>
-            {/* Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Button
-                asChild
-                className="bg-white text-blue-color w-full sm:w-48 lg:w-56 hover:bg-white/20 hover:text-white transition"
-              >
-                <Link href="#contact">
-                  <Phone className="mr-1" /> Contact Us
-                </Link>
-              </Button>
-              <Button
-                asChild
-                variant="outline"
-                className="w-full sm:w-48 lg:w-56 bg-white/20 border-white text-white hover:bg-white hover:text-blue-color transition"
-              >
-                <Link href="/products">
-                  <ShoppingCart className="mr-1" /> Shop Components
-                </Link>
-              </Button>
+
+      {/* ───── Hero ───── */}
+      <section className="hero-gradient relative overflow-hidden min-h-[90vh] flex items-center">
+        <div className="absolute top-20 left-[10%] w-72 h-72 bg-blue-500/20 rounded-full blur-[100px] animate-float" />
+        <div className="absolute bottom-20 right-[10%] w-96 h-96 bg-purple-500/15 rounded-full blur-[120px] animate-float-delayed" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[150px] animate-float-slow" />
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div className="space-y-8 text-center lg:text-left">
+              <div className="inline-flex items-center gap-2 bg-white/10 border border-white/10 rounded-full px-4 py-1.5 text-sm text-blue-200 backdrop-blur-sm">
+                <Zap className="w-3.5 h-3.5" />
+                Trusted by makers across India
+              </div>
+
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.1] tracking-tight">
+                Build the Future
+                <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
+                  One Circuit at a Time
+                </span>
+              </h1>
+
+              <p className="text-lg text-slate-300 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                Premium electronics and IoT components for students, hobbyists,
+                and developers. From Arduino boards to sensors &mdash;
+                everything you need to bring your ideas to life.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <Button
+                  asChild
+                  size="lg"
+                  className="bg-brand hover:bg-brand-dark text-white rounded-xl text-base px-8 h-12 shadow-lg shadow-blue-500/25"
+                >
+                  <Link href="/products">
+                    <ShoppingCart className="w-4 h-4 mr-2" />
+                    Browse Components
+                  </Link>
+                </Button>
+                <Button
+                  asChild
+                  size="lg"
+                  variant="outline"
+                  className="rounded-xl text-base px-8 h-12 border-white/20 text-white bg-white/5 hover:bg-white/10 hover:text-white backdrop-blur-sm"
+                >
+                  <Link href="#contact">
+                    <Phone className="w-4 h-4 mr-2" />
+                    Get in Touch
+                  </Link>
+                </Button>
+              </div>
+            </div>
+
+            <div className="hidden lg:grid grid-cols-2 gap-4">
+              {[
+                {
+                  icon: Cpu,
+                  label: "Microcontrollers",
+                  desc: "Arduino, ESP32 & more",
+                  gradient: "from-blue-500/20 to-blue-600/10",
+                },
+                {
+                  icon: Wifi,
+                  label: "IoT Modules",
+                  desc: "WiFi, Bluetooth, LoRa",
+                  gradient: "from-purple-500/20 to-purple-600/10",
+                },
+                {
+                  icon: Zap,
+                  label: "Sensors",
+                  desc: "Temperature, motion & more",
+                  gradient: "from-cyan-500/20 to-cyan-600/10",
+                },
+                {
+                  icon: Component,
+                  label: "Components",
+                  desc: "Resistors, capacitors, LEDs",
+                  gradient: "from-emerald-500/20 to-emerald-600/10",
+                },
+              ].map((item, i) => (
+                <div
+                  key={i}
+                  className={`bg-gradient-to-br ${item.gradient} border border-white/10 backdrop-blur-sm rounded-2xl p-6 hover:border-white/20 transition-all duration-300 group cursor-pointer`}
+                >
+                  <item.icon className="w-8 h-8 text-blue-300 mb-3 group-hover:scale-110 transition-transform" />
+                  <h3 className="font-semibold text-white mb-1">
+                    {item.label}
+                  </h3>
+                  <p className="text-sm text-slate-400">{item.desc}</p>
+                </div>
+              ))}
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* Right side */}
-          <div className="grid grid-cols-2 gap-4 sm:gap-6">
+      {/* ───── Why Choose Us ───── */}
+      <section className="py-20 lg:py-28 bg-surface">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <p className="text-sm font-semibold text-brand uppercase tracking-wider mb-3">
+              Why CircuitBay
+            </p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-foreground tracking-tight">
+              Built for builders like you
+            </h2>
+            <p className="mt-4 text-muted-foreground text-lg">
+              We understand what makers need &mdash; quality components,
+              reliable delivery, and a community that has your back.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
-              { icon: Microchip, label: "Microcontrollers" },
-              { icon: WifiHigh, label: "IoT" },
-              { icon: Zap, label: "Sensors" },
-              { icon: Component, label: "Components" },
-            ].map((item, i) => (
+              {
+                icon: Award,
+                title: "Quality Assured",
+                desc: "Every component is tested and verified. We source only from trusted manufacturers so you can build with confidence.",
+                color: "bg-blue-50 text-blue-600",
+              },
+              {
+                icon: Truck,
+                title: "Fast Delivery",
+                desc: "Quick and reliable shipping across India. Get your components on time, every time, so your projects stay on schedule.",
+                color: "bg-emerald-50 text-emerald-600",
+              },
+              {
+                icon: UsersRound,
+                title: "Community Driven",
+                desc: "Join a growing community of electronics enthusiasts. Get help, share projects, and discover new ideas together.",
+                color: "bg-purple-50 text-purple-600",
+              },
+            ].map((card, i) => (
               <div
                 key={i}
-                className="bg-secondary h-28 sm:h-32 flex flex-col items-center justify-center rounded-lg shadow-sm hover:shadow-md transition hover:bg-secondary/20"
+                className="card-hover bg-white rounded-2xl p-8 border border-border/50"
               >
-                <item.icon size={28} className="mb-2 sm:mb-3 text-blue-color" />
-                <p className="text-sm sm:text-base font-medium text-blue-color">
-                  {item.label}
+                <div
+                  className={`inline-flex items-center justify-center w-12 h-12 rounded-xl ${card.color} mb-5`}
+                >
+                  <card.icon className="w-6 h-6" />
+                </div>
+                <h3 className="text-lg font-semibold text-foreground mb-2">
+                  {card.title}
+                </h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  {card.desc}
                 </p>
               </div>
             ))}
@@ -133,365 +218,233 @@ export default function Index() {
         </div>
       </section>
 
-      {/* Why choose us */}
-      <section className="bg-foreground-secondary px-6 md:px-12 py-16">
-        <div className="text-center max-w-2xl mx-auto">
-          <h1 className="text-3xl sm:text-4xl font-bold mb-4">
-            Why choose CircuitBay?
-          </h1>
-          <p className="text-base text-muted-foreground">
-            We understand the needs of makers, students, and developers.
-            That&apos;s why we curate only the best components for your
-            projects.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mt-12">
-          {[
-            {
-              icon: Truck,
-              title: "Fast Delivery",
-              desc: "Quick and reliable shipping to get your components when you need them.",
-              color: "bg-blue-color",
-            },
-            {
-              icon: Award,
-              title: "Quality Assured",
-              desc: "All components are tested and verified to ensure top-notch standards.",
-              color: "bg-blue-color",
-            },
-            {
-              icon: UsersRound,
-              title: "Community Support",
-              desc: "Join our community of makers and get help with projects and parts.",
-              color: "bg-blue-color",
-            },
-          ].map((card, i) => (
-            <div
-              key={i}
-              className="bg-secondary p-6 rounded-xl shadow-sm flex flex-col items-center text-center hover:shadow-lg hover:-translate-y-1 transition"
+      {/* ───── Featured Products ───── */}
+      <section id="products" className="py-20 lg:py-28 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4 mb-12">
+            <div>
+              <p className="text-sm font-semibold text-brand uppercase tracking-wider mb-3">
+                Featured
+              </p>
+              <h2 className="text-3xl sm:text-4xl font-bold text-foreground tracking-tight">
+                Popular Components
+              </h2>
+            </div>
+            <Button
+              asChild
+              variant="ghost"
+              className="text-brand hover:text-brand-dark group"
             >
-              <div
-                className={`inline-flex h-14 w-14 items-center justify-center rounded-full ${card.color} text-white mb-4 shadow-md`}
-              >
-                <card.icon />
-              </div>
-              <h2 className="font-semibold text-lg mb-2">{card.title}</h2>
-              <p className="text-sm text-muted-foreground">{card.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Products */}
-      <section
-        id="products"
-        className="bg-foreground-secondary px-6 md:px-12 py-16"
-      >
-        <div className="text-center max-w-2xl mx-auto">
-          <h1 className="text-3xl md:text-4xl font-bold mb-4">
-            Featured Products
-          </h1>
-          <p className="text-base text-muted-foreground">
-            Explore our most popular electronics and IoT components
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto px-4 mt-12">
-          {stockList.length === 0 ? (
-            <p className="text-center text-gray-500 animate-pulse text-sm">Loading stock list...</p>
-          ) : (
-            <>
-              {stockList
-                .filter((item) => item.stock.status === "in_stock")
-                .slice(0, 4)
-                .map((item, index) => (
-                  <div
-                    key={item.slug || index}
-                    className="bg-white rounded-2xl shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col overflow-hidden border border-gray-100"
-                  >
-                    <div className="h-44 flex items-center justify-center bg-gray-50">
-                      <Image
-                        src={item.images[0]}
-                        alt={item.name}
-                        width={180}
-                        height={180}
-                        className="h-full object-contain p-4"
-                      />
-                    </div>
-
-                    <div className="p-5 flex flex-col flex-1 text-left">
-                      <h2 className="font-semibold text-lg mb-2 text-gray-800">
-                        {item.name}{" "}
-                        <span className="text-sm text-gray-500">({item.category})</span>
-                      </h2>
-
-                      <div className="mt-auto flex flex-col sm:flex-row items-center justify-between gap-3">
-                        <h3 className="text-lg font-bold text-blue-color">
-                          ₹{item.price}{" "}
-                          <span className="text-sm font-medium text-gray-500">
-                            | Stock: {item.stock.quantity}
-                          </span>
-                        </h3>
-                        <Button asChild className="w-full sm:w-auto px-5 py-2 rounded-xl bg-blue-color text-white hover:bg-blue-color/90 transition-colors">
-                          <a
-                            href={`//api.whatsapp.com/send?phone=918281461307&text=Hi, I would love to buy/know about this ${encodeURIComponent(item.name)}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            <MessageCircle />
-                          </a>
-                        </Button>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-            </>
-          )}
-        </div>
-
-        {/* View all */}
-        <div className="flex justify-center mt-12">
-          <Button asChild className="w-full sm:w-auto px-6 bg-blue-color text:white hover:bg-blue-color/90">
-            <Link href="/products">View all products</Link>
-          </Button>
-        </div>
-      </section>
-
-      {/* Instagram */}
-      <section className="bg-gradient-to-r from-purple-500 to-pink-500 py-16 px-6 text-center">
-        <div className="max-w-2xl mx-auto space-y-6">
-          <div className="flex justify-center">
-            <div className="bg-white/20 p-4 rounded-full">
-              <Instagram className="w-12 h-12 text-white" />
-            </div>
+              <Link href="/products">
+                View all products
+                <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </Button>
           </div>
-          <h1 className="text-3xl md:text-4xl font-bold text-white">
-            Follow us on Instagram
-          </h1>
-          <p className="text-base md:text-lg text-white/90 leading-relaxed">
-            Stay updated with our latest products, project ideas, and
-            electronics tips. Join our community of makers and innovators!
+
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+            {stockList.length === 0
+              ? Array.from({ length: 4 }).map((_, i) => (
+                  <ProductSkeleton key={i} />
+                ))
+              : stockList.map((item, index) => (
+                  <ProductCard key={item.slug || index} item={item} />
+                ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ───── Social CTA ───── */}
+      <section className="relative overflow-hidden py-20 bg-gradient-to-br from-brand via-blue-600 to-indigo-700">
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-10 left-10 w-40 h-40 border border-white rounded-full" />
+          <div className="absolute bottom-10 right-10 w-60 h-60 border border-white rounded-full" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 border border-white rounded-full" />
+        </div>
+
+        <div className="relative z-10 max-w-3xl mx-auto px-4 text-center">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white/15 backdrop-blur-sm mb-6">
+            <Instagram className="w-8 h-8 text-white" />
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+            Join the Community
+          </h2>
+          <p className="text-lg text-blue-100 mb-8 max-w-xl mx-auto">
+            Follow us on Instagram for project ideas, new arrivals, electronics
+            tips, and behind-the-scenes content.
           </p>
           <Button
             asChild
-            className="bg-white text-pink-600 font-semibold px-8 py-3 rounded-lg shadow-md hover:bg-pink-100 transition"
+            size="lg"
+            className="bg-white text-brand hover:bg-blue-50 rounded-xl text-base px-8 h-12 shadow-lg"
           >
-            <a href="https://www.instagram.com/circuitbayofficial">
-              <Instagram className="mr-1" /> circuitbayofficial
+            <a
+              href={INSTAGRAM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Instagram className="w-4 h-4 mr-2" />
+              {INSTAGRAM_HANDLE}
+              <ExternalLink className="w-3.5 h-3.5 ml-2 opacity-50" />
             </a>
           </Button>
         </div>
       </section>
 
-      {/* About Section */}
-      <section
-        id="about"
-        className="px-6 md:px-12 lg:px-20 py-16 bg-foreground-secondary"
-      >
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-7xl mx-auto items-center">
-          <div className="space-y-6 text-center lg:text-left">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-secondary-foreground leading-tight">
-              About CircuitBay
-            </h1>
-            <p className="text-base lg:text-lg text-secondary-foreground/90 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-              CircuitBay was founded with a simple mission: to make quality
-              electronics and IoT components accessible to students, hobbyists,
-              and developers across India. <br />
-              <br />
-              We understand the challenges of finding reliable components for
-              your projects. That&apos;s why we carefully curate our inventory
-              to include only the best products from trusted manufacturers.
+      {/* ───── About ───── */}
+      <section id="about" className="py-20 lg:py-28 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div className="space-y-6 text-center lg:text-left">
+              <p className="text-sm font-semibold text-brand uppercase tracking-wider">
+                Our Story
+              </p>
+              <h2 className="text-3xl sm:text-4xl font-bold text-foreground tracking-tight leading-tight">
+                Making quality electronics
+                <br className="hidden sm:block" />
+                accessible to everyone
+              </h2>
+              <p className="text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto lg:mx-0">
+                CircuitBay was born from a simple idea: students and hobbyists
+                in India deserve access to reliable, affordable electronics
+                components without the guesswork.
+              </p>
+              <p className="text-muted-foreground leading-relaxed max-w-xl mx-auto lg:mx-0">
+                We carefully curate our inventory from trusted manufacturers,
+                test every batch, and ship fast &mdash; so you can focus on what
+                matters: building incredible things.
+              </p>
+              <Button
+                asChild
+                variant="outline"
+                className="rounded-xl border-brand/30 text-brand hover:bg-brand hover:text-white transition-colors"
+              >
+                <Link href="#contact">
+                  <Rocket className="w-4 h-4 mr-2" />
+                  Start Building
+                </Link>
+              </Button>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              {[
+                {
+                  icon: GraduationCap,
+                  label: "Students",
+                  desc: "College projects & learning",
+                  color: "bg-blue-50 text-blue-600 border-blue-100",
+                },
+                {
+                  icon: Wrench,
+                  label: "Hobbyists",
+                  desc: "DIY builds & experiments",
+                  color: "bg-amber-50 text-amber-600 border-amber-100",
+                },
+                {
+                  icon: Code2,
+                  label: "Developers",
+                  desc: "IoT & embedded systems",
+                  color: "bg-emerald-50 text-emerald-600 border-emerald-100",
+                },
+                {
+                  icon: Lightbulb,
+                  label: "Innovators",
+                  desc: "Prototypes & startups",
+                  color: "bg-purple-50 text-purple-600 border-purple-100",
+                },
+              ].map((item, i) => (
+                <div
+                  key={i}
+                  className={`card-hover border rounded-2xl p-6 flex flex-col items-center text-center ${item.color}`}
+                >
+                  <item.icon className="w-8 h-8 mb-3" />
+                  <h3 className="font-semibold text-foreground text-sm mb-1">
+                    {item.label}
+                  </h3>
+                  <p className="text-xs text-muted-foreground">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ───── Contact ───── */}
+      <section id="contact" className="py-20 lg:py-28 bg-surface">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <p className="text-sm font-semibold text-brand uppercase tracking-wider mb-3">
+              Contact
+            </p>
+            <h2 className="text-3xl sm:text-4xl font-bold text-foreground tracking-tight">
+              Let&apos;s connect
+            </h2>
+            <p className="mt-4 text-muted-foreground text-lg">
+              Have questions about a product, need bulk ordering, or want help
+              picking the right components? We&apos;re here to help.
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-4 sm:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             {[
               {
-                icon: GraduationCap,
-                label: "Students",
-                color: "text-blue-color",
+                icon: Instagram,
+                title: "Instagram",
+                detail: INSTAGRAM_HANDLE,
+                desc: "DM us anytime",
+                link: INSTAGRAM_URL,
+                color: "bg-pink-50 text-pink-600",
               },
-              { icon: Hammer, label: "Hobbyists", color: "text-blue-color" },
-              { icon: Braces, label: "Developers", color: "text-blue-color" },
-              { icon: Lightbulb, label: "Tinkerers", color: "text-blue-color" },
-            ].map((item, i) => (
-              <div
+              {
+                icon: Mail,
+                title: "Email",
+                detail: EMAIL,
+                desc: "We reply within 24 hours",
+                link: `mailto:${EMAIL}`,
+                color: "bg-blue-50 text-blue-600",
+              },
+              {
+                icon: Phone,
+                title: "Phone",
+                detail: PHONE_DISPLAY,
+                desc: "Mon-Sat, 10am - 6pm",
+                link: `tel:${PHONE}`,
+                color: "bg-emerald-50 text-emerald-600",
+              },
+            ].map((card, i) => (
+              <a
                 key={i}
-                className="bg-secondary h-28 sm:h-32 flex flex-col items-center justify-center rounded-lg shadow-sm hover:shadow-md transition"
+                href={card.link}
+                target={card.link.startsWith("http") ? "_blank" : undefined}
+                rel={
+                  card.link.startsWith("http")
+                    ? "noopener noreferrer"
+                    : undefined
+                }
+                className="card-hover bg-white rounded-2xl p-8 border border-border/50 flex flex-col items-center text-center group"
               >
-                <item.icon size={32} className={`mb-2 sm:mb-3 ${item.color}`} />
-                <p className="text-sm sm:text-base font-medium">{item.label}</p>
-              </div>
+                <div
+                  className={`inline-flex items-center justify-center w-12 h-12 rounded-xl ${card.color} mb-5`}
+                >
+                  <card.icon className="w-6 h-6" />
+                </div>
+                <h3 className="font-semibold text-foreground mb-1">
+                  {card.title}
+                </h3>
+                <p className="text-sm text-muted-foreground mb-3">
+                  {card.desc}
+                </p>
+                <span className="text-sm font-medium text-brand group-hover:underline flex items-center gap-1">
+                  {card.detail}
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </span>
+              </a>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Get in Touch */}
-      <section id="contact" className="bg-muted px-6 sm:px-10 py-16">
-        <div className="text-center max-w-2xl mx-auto">
-          <h1 className="text-3xl sm:text-4xl font-bold mb-4 text-secondary-foreground">
-            Get in Touch
-          </h1>
-          <p className="text-base sm:text-lg text-muted-foreground">
-            Have questions about our products or need help with your project?
-            We&apos;d love to hear from you.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto mt-12">
-          {[
-            {
-              icon: Instagram,
-              title: "Instagram",
-              desc: "Follow us for updates",
-              detail: "circuitbayofficial",
-              link: "https://www.instagram.com/circuitbayofficial",
-              color: "bg-blue-color",
-            },
-            {
-              icon: Mail,
-              title: "Email",
-              desc: "Send us an email",
-              detail: "circuitbayofficial@gmail.com",
-              link: "mailto:circuitbayofficial@gmail.com",
-              color: "bg-blue-color",
-            },
-            {
-              icon: Phone,
-              title: "Phone",
-              desc: "Call us directly",
-              detail: "+91 8281461307",
-              link: "tel:+91 8281461307",
-              color: "bg-blue-color",
-            },
-          ].map((card, i) => (
-            <div
-              key={i}
-              className="bg-white p-6 rounded-2xl shadow-sm flex flex-col items-center text-center hover:shadow-lg hover:-translate-y-1 transition duration-300"
-            >
-              <div
-                className={`inline-flex h-14 w-14 items-center justify-center rounded-full ${card.color} text-white mb-4 shadow-md`}
-              >
-                <card.icon size={24} />
-              </div>
-              <h2 className="font-semibold text-lg text-secondary-foreground mb-2">
-                {card.title}
-              </h2>
-              <p className="text-sm text-muted-foreground">{card.desc}</p>
-              <p className="text-sm font-medium mt-1 text-blue-color hover:font-bold">
-                <a href={card.link}>{card.detail}</a>
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 text-gray-300">
-        <div className="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-          {/* Brand + About */}
-          <div>
-            <Image
-              src="/images/Hero_Logo.png"
-              alt="Logo"
-              width={160}
-              height={50}
-              priority
-              className="mb-4"
-            />
-            <p className="text-sm leading-relaxed">
-              Empowering innovation with quality electronics and IoT components.
-            </p>
-
-            {/* Socials */}
-            <div className="flex gap-4 mt-4">
-              <a
-                href="https://www.instagram.com/circuitbayofficial"
-                className="hover:text-blue-500 transition"
-              >
-                <Instagram className="w-5 h-5" />
-              </a>
-              <a href="#" className="hover:text-blue-400 transition">
-                <Facebook className="w-5 h-5" />
-              </a>
-              <a href="#" className="hover:text-sky-400 transition">
-                <Twitter className="w-5 h-5" />
-              </a>
-            </div>
-          </div>
-
-          {/* Quick Links */}
-          <div>
-            <h3 className="text-lg font-semibold text-white mb-4">
-              Quick Links
-            </h3>
-            <ul className="space-y-2">
-              <li>
-                <Link href="/" className="hover:text-blue-500 transition">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#products"
-                  className="hover:text-blue-500 transition"
-                >
-                  Product
-                </Link>
-              </li>
-              <li>
-                <Link href="#about" className="hover:text-blue-500 transition">
-                  About
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#contact"
-                  className="hover:text-blue-500 transition"
-                >
-                  Contact
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Contact Info */}
-          <div>
-            <h3 className="text-lg font-semibold text-white mb-4">
-              Contact Info
-            </h3>
-            <ul className="space-y-3 text-sm">
-              <li className="flex items-center gap-2 hover:text-blue-color">
-                <Instagram className="w-4 h-4" />
-                <a href="https://www.instagram.com/circuitbayofficial">
-                  circuitbayofficial
-                </a>
-              </li>
-              <li className="flex items-center gap-2 hover:text-blue-color">
-                <Phone className="w-4 h-4" />
-                <a href="tel:+91 8281461307">+91 8281461307</a>
-              </li>
-              <li className="flex items-center gap-2 hover:text-blue-color">
-                <Mail className="w-4 h-4" />
-                <a href="mailto:circuitbayofficial@gmail.com">
-                  circuitbayofficial@gmail.com
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        {/* Bottom bar */}
-        <div className="border-t border-gray-700 py-4 text-center text-sm text-gray-400">
-          © {new Date().getFullYear()} <span className="text-white font-semibold">CircuitBay</span>. All rights reserved.
-          <span className="block sm:inline">
-            {" "}
-            Built with ❤️ for makers and innovators.
-          </span>
-        </div>
-      </footer>
+      <Footer />
     </>
   );
 }
